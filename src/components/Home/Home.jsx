@@ -2,7 +2,6 @@ import { Box, IconButton, Tooltip, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import React, { useState } from "react";
-import AddTodo from "../Add/AddTodo";
 import EditTodo from "../Edit/EditTodo";
 
 import "./Home.css";
@@ -14,10 +13,6 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const [currentItem, setCurrentItem] = useState(null);
-  // Open and close Add Todo Modal
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   // Open and close Edit Todo
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -152,7 +147,7 @@ const Home = () => {
             )}
           </Box>
         </Box>
-        <AddTodo open={open} handleClose={handleClose} />
+
         <EditTodo
           openEditModal={openEditModal}
           closeModal={closeModal}

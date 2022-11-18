@@ -1,10 +1,16 @@
 import { Box, IconButton, TextField, Tooltip } from "@mui/material";
 import React, { useState } from "react";
+import AddTodo from "../Add/AddTodo";
 
 import { IoMdAdd } from "react-icons/io";
 import { useSelector } from "react-redux";
 
 const SearchTodo = () => {
+  // Open and close Add Todo Modal
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   //   Getting todos from redux store
   const Todo = useSelector((state) => state.todo);
 
@@ -19,10 +25,10 @@ const SearchTodo = () => {
   };
 
   const searchResult = Todo.filter((item) => {
-    return (
-      item.title.toLowerCase().includes(searchItems.toLowerCase()) ||
-      item.details.toLowerCase().includes(searchItems.toLowerCase())
-    );
+    return searchItems.toLowerCase() === ""
+      ? item
+      : item.title.toLowerCase().includes(searchItems.toLowerCase()) ||
+          item.details.toLowerCase().includes(searchItems.toLowerCase());
   });
 
   return (
@@ -50,11 +56,11 @@ const SearchTodo = () => {
           size="small"
           onFocus={handleShow}
           onBlur={handleHide}
-          value={searchItems}
+          //   value={searchItems}
           onChange={handleChange}
         />
         <Tooltip title="Add Todo" placement="top" arrow>
-          <IconButton sx={{ fontSize: "2rem" }}>
+          <IconButton sx={{ fontSize: "2rem" }} onClick={handleOpen}>
             <IoMdAdd />
           </IconButton>
         </Tooltip>
@@ -122,6 +128,7 @@ const SearchTodo = () => {
           </article>
         ))}
       </Box>
+      <AddTodo open={open} handleClose={handleClose} />
     </>
   );
 };

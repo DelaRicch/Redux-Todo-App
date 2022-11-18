@@ -6,8 +6,9 @@ import Cookies from "js-cookie";
 //   : [];
 
 // Using Cookies to get stored state
-let result = Cookies.get("initialState");
-result = JSON.parse(result);
+let result = Cookies.get("initialState")
+  ? JSON.parse(Cookies.get("initialState"))
+  : [];
 const initialState = result;
 
 const todoSlice = createSlice({

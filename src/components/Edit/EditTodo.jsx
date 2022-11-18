@@ -18,7 +18,7 @@ const EditTodo = ({ closeModal, openEditModal, id }) => {
   const onDetailsChange = (e) => setDetails(e.target.value);
 
   const saveEdit = () => {
-    if (title && details) {
+    if (title || details) {
       dispatch(
         editTodo({
           id: id,
@@ -27,6 +27,7 @@ const EditTodo = ({ closeModal, openEditModal, id }) => {
         })
       );
       console.log(title);
+      console.log(details);
     }
     closeModal();
   };
